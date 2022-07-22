@@ -11,7 +11,7 @@ body {
 
 /* header + footer */
 .header, .footer {
-  background-color: #006699;
+  background-color: #1b1b1b;
   color: #f9faf8;
 }
 
@@ -20,6 +20,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100px;
+  border-bottom: 2px #f9faf8 solid;
 }
 
 .logo {
@@ -32,6 +33,27 @@ body {
   padding-left: 40px;
   align-items: center;
   height: 70px;
+  border-top: 2px #f9faf8 solid;
 }
 
 /*center-content*/
+
+.center-content {
+  flex: auto;
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 3.5fr minmax(200px, 1fr);
+  background-color: #1b1b1b;
+}
+
+.left-column {
+
+}
+
+.center-column {
+  background-color: #4e4e4e;
+  border-radius: 7px;
+}
+
+.right-column {
+
+}
