@@ -45,16 +45,10 @@ body {
   background-color: #f9faf8;
 }
 
-.left-column {
-}
-
 .center-column {
   background-color: #8f8f8f;
   border: 2px #f9faf8 solid;
   border-radius: 7px;
-}
-
-.right-column {
 }
 
 .history {
