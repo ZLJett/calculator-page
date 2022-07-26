@@ -11,7 +11,7 @@ body {
 
 /* header + footer */
 .header, .footer {
-  background-color: #006699;
+  background-color: #0072c3;
   color: #f9faf8;
 }
 
@@ -64,7 +64,7 @@ body {
 /*calculator*/
 
 .calculator {
-  background-color: #cccecb;
+  background-color: #343434;
   padding: 6px;
   width: 500px;
 }
@@ -91,5 +91,26 @@ body {
 .pad {
   display: grid;
   grid-template-columns: repeat(3, 1fr) 1.4fr;
-  gap: 4px;
+  gap: 3px;
+  background-color: #343434;
 }
+
+.calc-button {
+  border-radius: 0px;
+  border: 0px;
+  font-size: large;
+  color: #f9faf8;
+  font-weight: 550;
+  background-color: #1b1b1b;
+  height: 35px;
+}
+
+.divide {
+  font-size: x-large
+}
+
+.enter {
+  font-size: x-large;
+  background-color: #0072c3;
+}
+
