@@ -1,3 +1,11 @@
+const errorDisplay = document.querySelector(".error-display");
+const topDisplay = document.querySelector(".top-display");
+const bottomDisplay = document.querySelector(".bottom-display");
+const enterButton = document.querySelector(".enter");
+const clearAllButton = document.querySelector(".clear-all");
+const operatorButtons = document.querySelectorAll(".operator");
+const operandButtons = document.querySelectorAll(".operand");
+
 //testing calc object
 let currentCalc = {
   firstNum: "20.222",
@@ -70,9 +78,8 @@ function operate() {
   }
 }
 
-
 function changeNum() {
-  screen.textContent = currentCalc["result"];
+  bottomDisplay.textContent = currentCalc["result"];
 }
 
 function test() {
@@ -80,6 +87,8 @@ function test() {
   changeNum();
 }
 
-const screen = document.querySelector(".screen-bottom");
-const button = document.querySelector(".enter")
-button.addEventListener("click", test);
+// NOTE hooked to test function as a placeholder
+enterButton.addEventListener("click", test);
+clearAllButton.addEventListener("click", test);
+operatorButtons.forEach(button => button.addEventListener("click", test));
+operandButtons.forEach(button => button.addEventListener("click", test));

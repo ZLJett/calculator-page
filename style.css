@@ -69,19 +69,19 @@ body {
   width: 500px;
 }
 
-.screen-error {
+.error-display {
   width: 500px;
   height: 26px;
   background: #f5f5f5;
 }
 
-.screen-top {
+.top-display {
   width: 500px;
   height: 26px;
   background: #f7acac;
 }
 
-.screen-bottom {
+.bottom-display {
   width: 500px;
   height: 46px;
   background: #f35353;
