@@ -71,7 +71,6 @@ function operate() {
 }
 
 
-// below is for testing
 function changeNum() {
   screen.textContent = currentCalc["result"];
 }
