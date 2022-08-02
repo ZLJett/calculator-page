@@ -8,9 +8,9 @@ const operandButtons = document.querySelectorAll(".operand");
 
 //testing calc object
 let currentCalc = {
-  firstNum: "20.222",
+  firstNum: "20",
   operator: "+",
-  secondNum: "80.333",
+  secondNum: "80",
   result: "",
 }
 
@@ -59,7 +59,7 @@ function checkLength(rawResult) {
   return adjustedResult;
 }
 
-// operate finds the result of the calculation and saves it
+// Finds the result of the calculation and saves it - !!!rewrite this, see below!!!
 function operate() {
   if ((currentCalc["operator"] === "/") && (currentCalc["secondNum"] === "0")) {
     // displayError("/0");
@@ -67,7 +67,6 @@ function operate() {
     return;
   }
   let rawResult = findResult();
-  console.log(rawResult)
   let adjustedResult = checkLength(rawResult);
   if (adjustedResult === "ERROR") {
     // displayError("result-length");
@@ -78,13 +77,33 @@ function operate() {
   }
 }
 
-function changeNum() {
-  bottomDisplay.textContent = currentCalc["result"];
+// Formats and displays current state of the calculation
+function updateDisplay() {
+  let topLine = "";
+  let bottomLine = "";
+  let spacedOperator = " " + currentCalc["operator"] + " ";
+  let equalSign = " = ";
+  if (currentCalc["result"] !== "") {
+    topLine = currentCalc["firstNum"] + spacedOperator + currentCalc["secondNum"] + equalSign;
+    bottomLine = currentCalc["result"];
+  } else if (currentCalc["secondNum"] !== "") {
+    topLine = currentCalc["firstNum"] + spacedOperator;
+    bottomLine = currentCalc["secondNum"];
+  } else if (currentCalc["operator"] !== "") {
+    topLine = currentCalc["firstNum"];
+    bottomLine = currentCalc["operator"];
+  } else {
+    bottomLine = currentCalc["firstNum"];
+  }
+  topDisplay.textContent = topLine;
+  bottomDisplay.textContent = bottomLine;
 }
+
+
 
 function test() {
   operate();
-  changeNum();
+  updateDisplay();
 }
 
 // NOTE hooked to test function as a placeholder
