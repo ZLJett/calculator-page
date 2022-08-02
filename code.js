@@ -8,9 +8,9 @@ const operandButtons = document.querySelectorAll(".operand");
 
 //testing calc object
 let currentCalc = {
-  firstNum: "20",
-  operator: "+",
-  secondNum: "80",
+  firstNum: "2012424234213423423423423",
+  operator: "*",
+  secondNum: "802314234213424214234234",
   result: "",
 }
 
@@ -62,15 +62,15 @@ function checkLength(rawResult) {
 // Finds the result of the calculation and saves it - !!!rewrite this, see below!!!
 function operate() {
   if ((currentCalc["operator"] === "/") && (currentCalc["secondNum"] === "0")) {
-    // displayError("/0");
+    displayError("/0");
     currentCalc["result"] = "ERROR";
     return;
   }
   let rawResult = findResult();
   let adjustedResult = checkLength(rawResult);
   if (adjustedResult === "ERROR") {
-    // displayError("result-length");
-    currentCalc["result"] = "ERROR (long)";
+    displayError("result-length");
+    currentCalc["result"] = "ERROR";
   } else {
     currentCalc["result"] = adjustedResult;
     // saveHistory();
@@ -99,6 +99,19 @@ function updateDisplay() {
   bottomDisplay.textContent = bottomLine;
 }
 
+function displayError(type) {
+  switch (type) {
+    case "operand-length":
+      errorDisplay.textContent = "operand-length error";
+      break;
+    case "/0":
+      errorDisplay.textContent = "/0 error";
+      break;
+    case "result-length":
+      errorDisplay.textContent = "result-length error";
+      break;
+  }
+}
 
 
 function test() {
