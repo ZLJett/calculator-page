@@ -8,9 +8,9 @@ const operandButtons = document.querySelectorAll(".operand");
 
 //testing calc object
 let currentCalc = {
-  firstNum: "2012424234213423423423423",
+  firstNum: "29994999978",
   operator: "*",
-  secondNum: "802314234213424214234234",
+  secondNum: "99991992497",
   result: "",
 }
 
@@ -32,7 +32,7 @@ function findResult() {
       result = firstOperand.div(secondOperand);
       break;
   }
-  return result.toString()                        // also removes any trailing zeros
+  return result.toString()    // also removes any trailing zeros
 }
 
 function checkLength(rawResult) {
@@ -40,13 +40,18 @@ function checkLength(rawResult) {
   let cleanedResult = Number(rawResult).toString();
   let resultNum = Number(cleanedResult);
   let maxLength = cleanedResult.includes("-") ? 16 : 15;
+  console.log(cleanedResult);
+  console.log(cleanedResult.length);
   if (cleanedResult.length > maxLength) {
     switch (true) {
+      case cleanedResult.includes("e"):
+        adjustedResult = "ERROR";
+        return adjustedResult;
       case cleanedResult.includes("."):
         let splitNum = cleanedResult.split(".");
         let wholeNums = splitNum[0].length;
         let roundTo = maxLength - (wholeNums + 1);   // +1 is to account for decimal
-        if (roundTo >= 3) {
+        if (roundTo >= 3) {    // if rounding would take number to less than three decimal places then fall through to "ERROR"
           adjustedResult = resultNum.toFixed(roundTo);
           return adjustedResult;
         }
@@ -68,6 +73,7 @@ function operate() {
   }
   let rawResult = findResult();
   let adjustedResult = checkLength(rawResult);
+  //let adjustedResult = rawResult;
   if (adjustedResult === "ERROR") {
     displayError("result-length");
     currentCalc["result"] = "ERROR";
