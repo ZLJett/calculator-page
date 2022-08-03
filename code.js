@@ -6,6 +6,8 @@ const clearAllButton = document.querySelector(".clear-all");
 const operatorButtons = document.querySelectorAll(".operator");
 const operandButtons = document.querySelectorAll(".operand");
 
+let calcHistory = [];
+
 //testing calc object
 let currentCalc = {
   firstNum: "20",
@@ -61,6 +63,14 @@ function checkLength(rawResult) {
   return adjustedResult;
 }
 
+function saveHistory() {
+  if (calcHistory.length === 10) {
+    calcHistory.shift();
+  }
+  historyObject = Object.assign({}, currentCalc);
+  calcHistory.push(historyObject);
+}
+
 // Finds the result of the calculation and saves it - !!!rewrite this, see below!!!
 function operate() {
   if ((currentCalc["operator"] === "/") && (currentCalc["secondNum"] === "0")) {
@@ -75,7 +85,7 @@ function operate() {
     currentCalc["result"] = "ERROR";
   } else {
     currentCalc["result"] = adjustedResult;
-    // saveHistory();
+    saveHistory();
   }
 }
 
