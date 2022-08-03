@@ -115,14 +115,29 @@ function displayError(type) {
   }
 }
 
+function removeError(type) {
+  switch (true) {
+    case type === "all":
+      errorDisplay.textContent = "";
+      break;
+    case type === "operand-length":
+      errorDisplay.textContent = "";
+      break;
+  }
+}
+
 
 function test() {
   operate();
   updateDisplay();
 }
 
+function testTwo() {
+  removeError("all");
+}
+
 // NOTE hooked to test function as a placeholder
 enterButton.addEventListener("click", test);
-clearAllButton.addEventListener("click", test);
+clearAllButton.addEventListener("click", testTwo);
 operatorButtons.forEach(button => button.addEventListener("click", test));
 operandButtons.forEach(button => button.addEventListener("click", test));
