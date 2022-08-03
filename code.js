@@ -6,14 +6,18 @@ const clearAllButton = document.querySelector(".clear-all");
 const operatorButtons = document.querySelectorAll(".operator");
 const operandButtons = document.querySelectorAll(".operand");
 
+let currentCalc = new calculation;
 let calcHistory = [];
 
-//testing calc object
-let currentCalc = {
-  firstNum: "20",
-  operator: "+",
-  secondNum: "80",
-  result: "",
+function calculation() {
+  this.firstNum = "";
+  this.operator = "";
+  this.secondNum = "";
+  this.result = "";
+}
+
+function newCalc() {
+  currentCalc = new calculation
 }
 
 function findResult() {
