@@ -5,6 +5,7 @@ const enterButton = document.querySelector(".enter");
 const clearAllButton = document.querySelector(".clear-all");
 const operatorButtons = document.querySelectorAll(".operator");
 const operandButtons = document.querySelectorAll(".operand");
+const historyDisplay = document.querySelector(".history-display");
 
 
 function calculation() {
@@ -69,8 +70,8 @@ function saveHistory() {
   if (calcHistory.length === 10) {
     calcHistory.shift();
   }
-  historyObject = Object.assign({}, currentCalc);
-  calcHistory.push(historyObject);
+  let oldCalc = Object.assign({}, currentCalc);
+  calcHistory.push(oldCalc);
 }
 
 // Finds the result of the calculation and saves it - !!!rewrite this, see below!!!
@@ -135,6 +136,31 @@ function removeError(type) {
     case type === "operand-length":
       errorDisplay.textContent = "";
       break;
+  }
+}
+
+function displayHistory() {
+  let recentHistory = calcHistory.reverse();
+  let equalSign = " = ";
+  for (oldCalc of recentHistory) {
+    let spacedOperator = " " + oldCalc["operator"] + " ";
+    let topLine = oldCalc["firstNum"] +
+      spacedOperator +
+      oldCalc["secondNum"] +
+      equalSign;
+    let bottomLine = oldCalc["result"];
+    // add to history-display
+    let historyCard = document.createElement("div");
+    historyCard.classList.add("history-card");
+    let historyTop = document.createElement("div");
+    historyTop.classList.add("history-top");
+    historyTop.textContent = topLine;
+    historyCard.append(historyTop);
+    let historyBottom = document.createElement("div");
+    historyBottom.classList.add("history-bottom");
+    historyBottom.textContent = bottomLine;
+    historyCard.append(historyBottom);
+    historyDisplay.append(historyCard);
   }
 }
 
