@@ -6,8 +6,6 @@ const clearAllButton = document.querySelector(".clear-all");
 const operatorButtons = document.querySelectorAll(".operator");
 const operandButtons = document.querySelectorAll(".operand");
 
-let currentCalc = new calculation;
-let calcHistory = [];
 
 function calculation() {
   this.firstNum = "";
@@ -140,6 +138,12 @@ function removeError(type) {
   }
 }
 
+function clearAll() {
+  newCalc();
+  removeError("all");
+  updateDisplay()
+}
+
 function enter() {
   if ((currentCalc["secondNum"] !== "") && (currentCalc["result"] === "")) {
     removeError("operand-length");
@@ -157,8 +161,12 @@ function testTwo() {
   removeError("all");
 }
 
+
+let currentCalc = new calculation;
+let calcHistory = [];
+
 // NOTE hooked to test function as a placeholder
 enterButton.addEventListener("click", enter);
-clearAllButton.addEventListener("click", testTwo);
+clearAllButton.addEventListener("click", clearAll);
 operatorButtons.forEach(button => button.addEventListener("click", test));
 operandButtons.forEach(button => button.addEventListener("click", test));
