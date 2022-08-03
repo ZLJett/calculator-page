@@ -8,9 +8,9 @@ const operandButtons = document.querySelectorAll(".operand");
 
 //testing calc object
 let currentCalc = {
-  firstNum: "4500001000",
-  operator: "*",
-  secondNum: "-4501000000",
+  firstNum: "20",
+  operator: "+",
+  secondNum: "80",
   result: "",
 }
 
@@ -126,6 +126,13 @@ function removeError(type) {
   }
 }
 
+function enter() {
+  if ((currentCalc["secondNum"] !== "") && (currentCalc["result"] === "")) {
+    removeError("operand-length");
+    operate();
+    updateDisplay();
+  }
+}
 
 function test() {
   operate();
@@ -137,7 +144,7 @@ function testTwo() {
 }
 
 // NOTE hooked to test function as a placeholder
-enterButton.addEventListener("click", test);
+enterButton.addEventListener("click", enter);
 clearAllButton.addEventListener("click", testTwo);
 operatorButtons.forEach(button => button.addEventListener("click", test));
 operandButtons.forEach(button => button.addEventListener("click", test));
