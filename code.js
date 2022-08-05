@@ -210,10 +210,12 @@ function applyInput(operand, inputValue) {
     } else {
       currentCalc[operand] = currentCalc[operand].slice(0, -1);
     }
+    updateDisplay();
     return;
   } else if (inputValue === "clear-last") {
     removeError("operand-length");
     currentCalc[operand] = "";
+    updateDisplay();
     return;
   } else if ((inputValue === "0") && (currentCalc[operand] === "0")) {
     return
@@ -225,6 +227,7 @@ function applyInput(operand, inputValue) {
       maxLength = 16;
       currentCalc[operand] = "-" + currentCalc[operand]
     }
+    updateDisplay();
     return;
   } else if ((inputValue === ".") && (currentCalc[operand].includes("."))) {
     return;
