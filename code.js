@@ -178,6 +178,61 @@ function enter() {
   }
 }
 
+function updateOperand(event) {
+  let operand = "";
+  let inputValue = event.target.dataset.value;
+  // Check if need to reset the calculation before dealing with the input
+  if (currentCalc["result"] !== "") {
+    newCalc();
+    removeError("all");
+  }
+  if (currentCalc["operator"] === "") {
+    operand = "firstNum";
+  } else {
+    operand = "secondNum";
+  }
+  applyInput(operand, inputValue);
+}
+
+function applyInput(operand, inputValue) {
+  let maxLength = currentCalc[operand].includes("-") ? 16 : 15;
+  if (inputValue === "backspace") {
+    removeError("operand-length");
+    if (currentCalc[operand] === "0.") {
+      currentCalc[operand] = "";
+    } else {
+      currentCalc[operand] = currentCalc[operand].slice(0, -1);
+    }
+    return;
+  } else if (inputValue === "clear-last") {
+    removeError("operand-length");
+    currentCalc[operand] = "";
+    return;
+  } else if ((inputValue === "0") && (currentCalc[operand] === "0")) {
+    return
+  } else if (inputValue === "+/-") {
+    removeError("operand-length");
+    if (currentCalc[operand].includes("-")) {
+      currentCalc[operand] = currentCalc[operand].replace("-", "");
+    } else {
+      maxLength = 16;
+      currentCalc[operand] = "-" + currentCalc[operand]
+    }
+    return;
+  } else if ((inputValue === ".") && (currentCalc[operand].includes("."))) {
+    return;
+  } else if (currentCalc[operand].length >= maxLength) {
+    displayError("operand-length");
+    return;
+  } else if ((inputValue === ".") && (currentCalc[operand].length === 0)) {
+    inputValue = "0."
+  }
+  currentCalc[operand] += inputValue;
+  updateDisplay();
+}
+
+
+
 function test() {
   operate();
   updateDisplay();
@@ -195,4 +250,4 @@ let calcHistory = [];
 enterButton.addEventListener("click", enter);
 clearAllButton.addEventListener("click", clearAll);
 operatorButtons.forEach(button => button.addEventListener("click", test));
-operandButtons.forEach(button => button.addEventListener("click", test));
+operandButtons.forEach(button => button.addEventListener("click", updateOperand));
