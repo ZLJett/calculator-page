@@ -93,6 +93,19 @@ function operate() {
   }
 }
 
+function addCommas(displayContent) {
+  let adjustedResult = "";
+  if (displayContent.includes(".")) {
+    let splitNum = displayContent.split(".");
+    let wholeNums = splitNum[0];
+    let commasAdded = wholeNums.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    adjustedResult = commasAdded + "." + splitNum[1];
+  } else {
+    adjustedResult = displayContent.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+  return adjustedResult;
+}
+
 // Formats and displays current state of the calculation
 function updateDisplay() {
   let firstOperand = false;
@@ -116,6 +129,7 @@ function updateDisplay() {
   if ((bottomLine === "") && (firstOperand)) {
     bottomLine = "0";    // Sets first operand display of "" to display "0" instead
   }
+  bottomLine = addCommas(bottomLine);
   topDisplay.textContent = topLine;
   bottomDisplay.textContent = bottomLine;
 }
