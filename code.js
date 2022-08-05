@@ -89,6 +89,7 @@ function operate() {
   } else {
     currentCalc["result"] = adjustedResult;
     saveHistory();
+    displayHistory();
   }
 }
 
@@ -139,8 +140,14 @@ function removeError(type) {
   }
 }
 
+function clearHistory() {
+  let historyCards = document.querySelectorAll(".history-card");
+  historyCards.forEach(card => card.remove());
+}
+
 function displayHistory() {
-  let recentHistory = calcHistory.reverse();
+  clearHistory();
+  let recentHistory = [...calcHistory].reverse();
   let equalSign = " = ";
   for (oldCalc of recentHistory) {
     let spacedOperator = " " + oldCalc["operator"] + " ";
@@ -255,7 +262,7 @@ function runningCalc(inputOperator) {
   newCalc();
   removeError("all");
   currentCalc["firstNum"] = lastResult;
-  currentCalc["operator"] = inputOperator
+  currentCalc["operator"] = inputOperator;
   updateDisplay();
 }
 
