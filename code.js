@@ -232,26 +232,30 @@ function applyInput(operand, inputValue) {
 }
 
 function updateOperator(event) {
-  let inputValue = event.target.dataset.value;
+  let inputOperator = event.target.dataset.value;
   removeError("operand-length");
   if (currentCalc["firstNum"] === "") {
     return;
   } else if ((currentCalc["secondNum"] !== "") || (currentCalc["result"] !== "")) {
-    runningCalc(inputValue);
+    runningCalc(inputOperator);
   } else if (currentCalc["operator" !== ""]) {
     return;
   } else {
-    currentCalc["operator"] = inputValue;
+    currentCalc["operator"] = inputOperator;
+    updateDisplay();
   }
 }
 
 // ADD IN COMMENT
-function runningCalc(inputValue) {
+function runningCalc(inputOperator) {
   if (currentCalc["result"] === "") {
     operate();
   }
   let lastResult = currentCalc["result"];
-
+  newCalc();
+  removeError("all");
+  currentCalc["firstNum"] = lastResult;
+  currentCalc["operator"] = inputOperator
   updateDisplay();
 }
 
@@ -273,5 +277,5 @@ let calcHistory = [];
 // NOTE hooked to test function as a placeholder
 enterButton.addEventListener("click", enter);
 clearAllButton.addEventListener("click", clearAll);
-operatorButtons.forEach(button => button.addEventListener("click", test));
+operatorButtons.forEach(button => button.addEventListener("click", updateOperator));
 operandButtons.forEach(button => button.addEventListener("click", updateOperand));
