@@ -266,22 +266,9 @@ function runningCalc(inputOperator) {
   updateDisplay();
 }
 
-
-
-function test() {
-  operate();
-  updateDisplay();
-}
-
-function testTwo() {
-  removeError("all");
-}
-
-
 let currentCalc = new calculation;
 let calcHistory = [];
 
-// NOTE hooked to test function as a placeholder
 enterButton.addEventListener("click", enter);
 clearAllButton.addEventListener("click", clearAll);
 operatorButtons.forEach(button => button.addEventListener("click", updateOperator));
