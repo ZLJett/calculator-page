@@ -95,6 +95,7 @@ function operate() {
 
 // Formats and displays current state of the calculation
 function updateDisplay() {
+  let firstOperand = false;
   let topLine = "";
   let bottomLine = "";
   let spacedOperator = " " + currentCalc["operator"] + " ";
@@ -110,6 +111,10 @@ function updateDisplay() {
     bottomLine = currentCalc["operator"];
   } else {
     bottomLine = currentCalc["firstNum"];
+    firstOperand = true;
+  }
+  if ((bottomLine === "") && (firstOperand)) {
+    bottomLine = "0";    // Sets first operand display of "" to display "0" instead
   }
   topDisplay.textContent = topLine;
   bottomDisplay.textContent = bottomLine;
