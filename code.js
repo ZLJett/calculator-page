@@ -231,6 +231,30 @@ function applyInput(operand, inputValue) {
   updateDisplay();
 }
 
+function updateOperator(event) {
+  let inputValue = event.target.dataset.value;
+  removeError("operand-length");
+  if (currentCalc["firstNum"] === "") {
+    return;
+  } else if ((currentCalc["secondNum"] !== "") || (currentCalc["result"] !== "")) {
+    runningCalc(inputValue);
+  } else if (currentCalc["operator" !== ""]) {
+    return;
+  } else {
+    currentCalc["operator"] = inputValue;
+  }
+}
+
+// ADD IN COMMENT
+function runningCalc(inputValue) {
+  if (currentCalc["result"] === "") {
+    operate();
+  }
+  let lastResult = currentCalc["result"];
+
+  updateDisplay();
+}
+
 
 
 function test() {
