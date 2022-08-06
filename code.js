@@ -111,7 +111,14 @@ function updateDisplay() {
   let firstOperand = false;
   let topLine = "";
   let bottomLine = "";
-  let spacedOperator = " " + currentCalc["operator"] + " ";
+  let padSymbols = {
+    "/": "÷",
+    "*": "×",
+    "-": "-",
+    "+": "+"
+  }
+  let displayOperator = padSymbols[currentCalc["operator"]];
+  let spacedOperator = " " + displayOperator + " ";
   let equalSign = " = ";
   if (currentCalc["result"] !== "") {
     topLine = currentCalc["firstNum"] + spacedOperator + currentCalc["secondNum"] + equalSign;
@@ -121,7 +128,7 @@ function updateDisplay() {
     bottomLine = currentCalc["secondNum"];
   } else if (currentCalc["operator"] !== "") {
     topLine = currentCalc["firstNum"];
-    bottomLine = currentCalc["operator"];
+    bottomLine = displayOperator;
   } else {
     bottomLine = currentCalc["firstNum"];
     firstOperand = true;
@@ -167,9 +174,16 @@ function clearHistory() {
 function displayHistory() {
   clearHistory();
   let recentHistory = [...calcHistory].reverse();
+  let padSymbols = {
+    "/": "÷",
+    "*": "×",
+    "-": "-",
+    "+": "+"
+  }
   let equalSign = " = ";
   for (oldCalc of recentHistory) {
-    let spacedOperator = " " + oldCalc["operator"] + " ";
+    let displayOperator = padSymbols[oldCalc["operator"]];
+    let spacedOperator = " " + displayOperator + " ";
     let topLine = oldCalc["firstNum"] +
       spacedOperator +
       oldCalc["secondNum"] +
