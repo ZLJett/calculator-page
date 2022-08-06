@@ -267,7 +267,7 @@ function applyInput(operand, inputValue) {
     currentCalc[operand] = "";
     updateDisplay();
     return;
-  } else if ((inputValue === "0") && (currentCalc[operand] === "0")) {
+  } else if ((inputValue === "0") && ((currentCalc[operand] === "0") || (currentCalc[operand] === ""))) {
     return
   } else if (inputValue === "+/-") {
     removeError("operand-length");
@@ -285,6 +285,8 @@ function applyInput(operand, inputValue) {
     displayError("operand-length");
     return;
   } else if ((inputValue === ".") && (currentCalc[operand].length === 0)) {
+    inputValue = "0."
+  } else if ((inputValue === ".") && (currentCalc[operand] === "-")) {
     inputValue = "0."
   }
   currentCalc[operand] += inputValue;
