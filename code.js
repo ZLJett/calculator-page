@@ -210,9 +210,27 @@ function clearAll() {
   updateDisplay()
 }
 
+// Checks if operand's value is invalid equivalent of 0 and changes to 0 if so
+function checkEntry(operand) {
+  let correctedResult = "0";
+  let posZeros = /^[0]\.[0]+$/gm;    // Matches 0.0 followed by any number of 0s
+  let negZeros = /^[-][0]\.[0]+$/gm;    // Matches -0.0 followed by any number of 0s
+  switch (true) {
+    case currentCalc[operand] === "-":
+    case currentCalc[operand] === "-0":
+    case currentCalc[operand] === "0.":
+    case currentCalc[operand] === "-0.":
+    case posZeros.test(currentCalc[operand]):
+    case negZeros.test(currentCalc[operand]):
+      currentCalc[operand] = correctedResult;
+      break;
+  }
+}
+
 function enter() {
   if ((currentCalc["secondNum"] !== "") && (currentCalc["result"] === "")) {
     removeError("operand-length");
+    checkEntry("secondNum");    // Check if second operand is invalid equivalent of 0 and corrects if so
     operate();
     updateDisplay();
   }
@@ -284,6 +302,7 @@ function updateOperator(event) {
   } else if (currentCalc["operator" !== ""]) {
     return;
   } else {
+    checkEntry("firstNum"); // Check if second operand is invalid equivalent of 0 and corrects if so
     currentCalc["operator"] = inputOperator;
     updateDisplay();
   }
@@ -292,6 +311,7 @@ function updateOperator(event) {
 // ADD IN COMMENT
 function runningCalc(inputOperator) {
   if (currentCalc["result"] === "") {
+    checkEntry("secondNum"); // Check if second operand is invalid equivalent of 0 and corrects if so
     operate();
   }
   let lastResult = currentCalc["result"];
