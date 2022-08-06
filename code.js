@@ -188,7 +188,7 @@ function displayHistory() {
       spacedOperator +
       oldCalc["secondNum"] +
       equalSign;
-    let bottomLine = oldCalc["result"];
+    let bottomLine = addCommas(oldCalc["result"]);
     // add to history-display
     let historyCard = document.createElement("div");
     historyCard.classList.add("history-card");
