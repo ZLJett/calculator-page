@@ -106,18 +106,23 @@ function addCommas(displayContent) {
   return adjustedResult;
 }
 
-// Formats and displays current state of the calculation
-function updateDisplay() {
-  let firstOperand = false;
-  let topLine = "";
-  let bottomLine = "";
+function processOperator(calcOperator) {
   let padSymbols = {
     "/": "÷",
     "*": "×",
     "-": "-",
     "+": "+"
   }
-  let displayOperator = padSymbols[currentCalc["operator"]];
+  let displayOperator = padSymbols[calcOperator];
+  return displayOperator;
+}
+
+// Formats and displays current state of the calculation
+function updateDisplay() {
+  let firstOperand = false;
+  let topLine = "";
+  let bottomLine = "";
+  let displayOperator = processOperator(currentCalc["operator"]);
   let spacedOperator = " " + displayOperator + " ";
   let equalSign = " = ";
   if (currentCalc["result"] !== "") {
@@ -174,15 +179,9 @@ function clearHistory() {
 function displayHistory() {
   clearHistory();
   let recentHistory = [...calcHistory].reverse();
-  let padSymbols = {
-    "/": "÷",
-    "*": "×",
-    "-": "-",
-    "+": "+"
-  }
   let equalSign = " = ";
   for (oldCalc of recentHistory) {
-    let displayOperator = padSymbols[oldCalc["operator"]];
+    let displayOperator = processOperator(oldCalc["operator"]);
     let spacedOperator = " " + displayOperator + " ";
     let topLine = oldCalc["firstNum"] +
       spacedOperator +
