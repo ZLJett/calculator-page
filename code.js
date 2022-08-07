@@ -209,20 +209,12 @@ function clearAll() {
   updateDisplay();
 }
 
-// Checks if operand's value is invalid equivalent of 0 and changes to 0 if so
+// Strips trailing zeros and changes any 0 equivalents, such as "-0." or "-0", to 0
 function checkEntry(operand) {
-  let correctedResult = "0";
-  let posZeros = /^[0]\.[0]+$/gm;    // Matches 0.0 followed by any number of 0s
-  let negZeros = /^[-][0]\.[0]+$/gm;    // Matches -0.0 followed by any number of 0s
-  switch (true) {
-    case currentCalc[operand] === "-":
-    case currentCalc[operand] === "-0":
-    case currentCalc[operand] === "0.":
-    case currentCalc[operand] === "-0.":
-    case posZeros.test(currentCalc[operand]):
-    case negZeros.test(currentCalc[operand]):
-      currentCalc[operand] = correctedResult;
-      break;
+  if (currentCalc[operand] === "-") {
+    currentCalc[operand] = "0";
+  } else {
+    currentCalc[operand] = Number(currentCalc[operand]).toString();    // Uses to number conversion correct string
   }
 }
 
