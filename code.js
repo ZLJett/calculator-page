@@ -16,7 +16,7 @@ function calculation() {
 }
 
 function newCalc() {
-  currentCalc = new calculation
+  currentCalc = new calculation;
 }
 
 function findResult() {
@@ -37,7 +37,7 @@ function findResult() {
       result = firstOperand.div(secondOperand);
       break;
   }
-  return result.toString()    // converts from Big object to string
+  return result.toString();    // converts from Big object to string
 }
 
 function checkLength(rawResult) {
@@ -206,7 +206,7 @@ function displayHistory() {
 function clearAll() {
   newCalc();
   removeError("all");
-  updateDisplay()
+  updateDisplay();
 }
 
 // Checks if operand's value is invalid equivalent of 0 and changes to 0 if so
@@ -268,14 +268,13 @@ function applyInput(operand, inputValue) {
     updateDisplay();
     return;
   } else if ((inputValue === "0") && ((currentCalc[operand] === "0") || (currentCalc[operand] === ""))) {
-    return
+    return;
   } else if (inputValue === "+/-") {
     removeError("operand-length");
     if (currentCalc[operand].includes("-")) {
       currentCalc[operand] = currentCalc[operand].replace("-", "");
     } else {
-      maxLength = 16;
-      currentCalc[operand] = "-" + currentCalc[operand]
+      currentCalc[operand] = "-" + currentCalc[operand];
     }
     updateDisplay();
     return;
@@ -285,9 +284,9 @@ function applyInput(operand, inputValue) {
     displayError("operand-length");
     return;
   } else if ((inputValue === ".") && (currentCalc[operand].length === 0)) {
-    inputValue = "0."
+    inputValue = "0.";
   } else if ((inputValue === ".") && (currentCalc[operand] === "-")) {
-    inputValue = "0."
+    inputValue = "0.";
   }
   currentCalc[operand] += inputValue;
   updateDisplay();
@@ -334,7 +333,7 @@ function keyInput(event) {
       clearAllButton.click();
       break;
     case "Backspace":
-      keyValue = "backspace";
+      keyValue = "backspace";    // Set key input to match data-value property on backspace button
     default:
       let matchedButton = document.querySelector(`button[data-value="${keyValue}"]`);
       matchedButton.click();
