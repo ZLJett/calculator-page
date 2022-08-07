@@ -327,6 +327,7 @@ function keyInput(event) {
   console.log(keyValue);
   switch (keyValue) {
     case "Enter":
+      event.preventDefault();
       enterButton.click();
       break;
     case "Delete":

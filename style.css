@@ -112,6 +112,10 @@ body {
   height: 35px;
 }
 
+.calc-button:focus {
+  outline: none;
+}
+
 .divide {
   font-size: x-large
 }
