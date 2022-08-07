@@ -323,6 +323,24 @@ function runningCalc(inputOperator) {
   updateDisplay();
 }
 
+function keyInput(event) {
+  let keyValue = event.key;
+  console.log(keyValue);
+  switch (keyValue) {
+    case "Enter":
+      enterButton.click();
+      break;
+    case "Delete":
+      clearAllButton.click();
+      break;
+    case "Backspace":
+      keyValue = "backspace";
+    default:
+      let matchedButton = document.querySelector(`button[data-value="${keyValue}"]`);
+      matchedButton.click();
+  }
+}
+
 let currentCalc = new calculation;
 let calcHistory = [];
 
@@ -330,3 +348,4 @@ enterButton.addEventListener("click", enter);
 clearAllButton.addEventListener("click", clearAll);
 operatorButtons.forEach(button => button.addEventListener("click", updateOperator));
 operandButtons.forEach(button => button.addEventListener("click", updateOperand));
+window.addEventListener("keydown", keyInput);
