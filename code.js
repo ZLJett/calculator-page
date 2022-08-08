@@ -55,7 +55,7 @@ function checkLength(rawResult) {
         let roundTo = maxLength - (wholeNums + 1);   // +1 is to account for decimal
         if (roundTo >= 3) {    // If rounding would take number to less than three decimal places then fall through to "ERROR"
           adjustedResult = resultNum.toFixed(roundTo);    // Also coverts to string
-          return adjustedResult;
+          return Number(adjustedResult).toString();
         }
       default:
         adjustedResult = "ERROR";
