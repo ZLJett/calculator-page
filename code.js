@@ -55,7 +55,7 @@ function checkLength(rawResult) {
         let roundTo = maxLength - (wholeNums + 1);   // +1 is to account for decimal
         if (roundTo >= 3) {    // If rounding would take number to less than three decimal places then fall through to "ERROR"
           adjustedResult = resultNum.toFixed(roundTo);    // Also coverts to string
-          return Number(adjustedResult).toString();
+          return Number(adjustedResult).toString();  // Deals with edge cases of where toFixed improper rounding produces a result with trailing zeros
         }
       default:
         adjustedResult = "ERROR";
@@ -259,7 +259,7 @@ function applyInput(operand, inputValue) {
     currentCalc[operand] = "";
     updateDisplay();
     return;
-  } else if ((inputValue === "0") && ((currentCalc[operand] === "0") || (currentCalc[operand] === ""))) {
+  } else if ((inputValue === "0") && (currentCalc[operand] === "0")) {
     return;
   } else if (inputValue === "+/-") {
     removeError("operand-length");
@@ -275,7 +275,10 @@ function applyInput(operand, inputValue) {
   } else if (currentCalc[operand].length >= maxLength) {
     displayError("operand-length");
     return;
-  } else if ((inputValue === ".") && (currentCalc[operand].length === 0)) {
+  } else if (currentCalc[operand] === "0") {
+    currentCalc[operand] = "";    // Attempts to add numbers after a zero will remove the zero so it can be replaced by the number
+  }
+  if ((inputValue === ".") && (currentCalc[operand].length === 0)) {
     inputValue = "0.";
   } else if ((inputValue === ".") && (currentCalc[operand] === "-")) {
     inputValue = "0.";
