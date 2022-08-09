@@ -87,6 +87,7 @@ body {
   padding: 0px 10px;
   text-align: right;
   font-size: large;
+  word-spacing: 0.10em;
 }
 
 .bottom-display {
@@ -200,6 +201,7 @@ body {
 
 .history-top {
   font-size: large;
+  word-spacing: 0.10em;
 }
 
 .history-bottom {
