@@ -312,8 +312,10 @@ function runningCalc(inputOperator) {
   let lastResult = currentCalc["result"];
   newCalc();
   removeError("all");
-  currentCalc["firstNum"] = lastResult;
-  currentCalc["operator"] = inputOperator;
+  if (lastResult !== "ERROR") {
+    currentCalc["firstNum"] = lastResult;
+    currentCalc["operator"] = inputOperator;
+  }
   updateDisplay();
 }
 
