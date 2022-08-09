@@ -20,7 +20,6 @@ body {
   justify-content: center;
   align-items: center;
   height: 100px;
-
 }
 
 .logo {
@@ -33,7 +32,6 @@ body {
   padding-left: 40px;
   align-items: center;
   height: 70px;
-
 }
 
 /*center-content*/
@@ -58,9 +56,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #8f8f8f;
-  border: 2px #f9faf8 solid;
-  border-radius: 7px;
   padding: 10px;
 }
 
@@ -171,24 +166,43 @@ body {
 
 /*history*/
 
+.history {
+  display: flex;
+  flex-direction: column;
+  border-radius: 7px;
+  background-color: #424242;
+  width: 362px;
+  min-height: 626px;
+  padding: 16px 36px;
+  margin-top: 12px;
+}
+
 .history-title {
-  font-size: large;
-  color: #1b1b1b;
+  font-size: x-large;
+  color: #f9faf8;
+  text-shadow: 2px 2px black;
   font-weight: bolder;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
+}
+
+.history-display {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }
 
 .history-card {
-  color: #1b1b1b;
+  color: #f9faf8;
+  text-shadow: 2px 2px black;
   margin-bottom: 10px;
+  text-align: right;
 }
 
 .history-top {
-  color: #1b1b1b;
+  font-size: large;
 }
 
 .history-bottom {
-  color: #1b1b1b;
-  font-size: large;
+  font-size: x-large;
   text-align: right;
 }
