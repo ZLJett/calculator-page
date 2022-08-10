@@ -320,21 +320,22 @@ function runningCalc(inputOperator) {
 }
 
 function keyInput(event) {
-  let keyValue = event.key;
-  console.log(keyValue);
+  let keyValue = event.key.toLowerCase();    // Set key input case to match data-value properties
+  let whiteList = ["backspace", "/", "*", "-", "+", "+/-", ".", "enter"];
   switch (keyValue) {
-    case "Enter":
-      event.preventDefault();
-      enterButton.click();
-      break;
-    case "Delete":
+    case "delete":
       clearAllButton.click();
       break;
-    case "Backspace":
-      keyValue = "backspace";    // Set key input to match data-value property on backspace button
+    case "=":
+      enterButton.click();
+      break;
+    case "enter":
+      event.preventDefault();    // Prevents enter button from pressing any buttons cursor is over
     default:
-      let matchedButton = document.querySelector(`button[data-value="${keyValue}"]`);
-      matchedButton.click();
+      if (Number.isInteger(Number(keyValue)) || whiteList.includes(keyValue)) {
+        let matchedButton = document.querySelector(`button[data-value="${keyValue}"]`);
+        matchedButton.click();
+      }
   }
 }
 
