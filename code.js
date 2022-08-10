@@ -37,7 +37,7 @@ function findResult() {
       result = firstOperand.div(secondOperand);
       break;
   }
-  return result.toString();    // converts from Big object to string
+  return result.toString();    // Converts from Big object to string
 }
 
 function checkLength(rawResult) {
@@ -52,10 +52,10 @@ function checkLength(rawResult) {
       case rawResult.includes("."):
         let splitNum = rawResult.split(".");
         let wholeNums = splitNum[0].length;
-        let roundTo = maxLength - (wholeNums + 1);   // +1 is to account for decimal
+        let roundTo = maxLength - (wholeNums + 1);    // +1 is to account for decimal
         if (roundTo >= 3) {    // If rounding would take number to less than three decimal places then fall through to "ERROR"
-          adjustedResult = resultNum.toFixed(roundTo);    // Also coverts to string
-          return Number(adjustedResult).toString();  // Deals with edge cases of where toFixed improper rounding produces a result with trailing zeros
+          adjustedResult = resultNum.toFixed(roundTo);    // toFixed also coverts to string
+          return Number(adjustedResult).toString();    // Deals with edge cases where toFixed improper rounding produces a result with trailing zeros
         }
       default:
         adjustedResult = "ERROR";
@@ -74,7 +74,6 @@ function saveHistory() {
   calcHistory.push(oldCalc);
 }
 
-// Finds the result of the calculation and saves it - !!!rewrite this, see below!!!
 function operate() {
   if ((currentCalc["operator"] === "/") && (currentCalc["secondNum"] === "0")) {
     displayError("/0");
@@ -188,7 +187,7 @@ function displayHistory() {
       oldCalc["secondNum"] +
       equalSign;
     let bottomLine = addCommas(oldCalc["result"]);
-    // add to history-display
+    // Add to history-display
     let historyCard = document.createElement("div");
     historyCard.classList.add("history-card");
     let historyTop = document.createElement("div");
@@ -297,16 +296,16 @@ function updateOperator(event) {
   } else if (currentCalc["operator" !== ""]) {
     return;
   } else {
-    checkEntry("firstNum"); // Check if second operand is invalid equivalent of 0 and corrects if so
+    checkEntry("firstNum");    // Check if second operand is invalid equivalent of 0 and corrects if so
     currentCalc["operator"] = inputOperator;
     updateDisplay();
   }
 }
 
-// ADD IN COMMENT
+// Rolls a partial or complete calculation’s result into a new calculation when an operator is entered 
 function runningCalc(inputOperator) {
   if (currentCalc["result"] === "") {
-    checkEntry("secondNum"); // Check if second operand is invalid equivalent of 0 and corrects if so
+    checkEntry("secondNum");    // Check if second operand is invalid equivalent of 0 and corrects if so
     operate();
   }
   let lastResult = currentCalc["result"];
